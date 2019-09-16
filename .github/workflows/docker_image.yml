@@ -1,0 +1,18 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+ 
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ansible: [2.6.19, 2.8.5]
+        ruby: [2.5.6, 2.6.4]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      run: RUBY_VERSION=${{ matrix.ruby }} ANSIBLE_VERSION=${{ matrix.ansible }} && docker build --build-arg RUBY_VERSION=$RUBY_VERSION --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION -t ansible-ruby:$RUBY_VERSION-$ANSIBLE_VERSION .
