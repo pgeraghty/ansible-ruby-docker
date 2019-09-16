@@ -15,4 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: RUBY_VERSION=${{ matrix.ruby }} ANSIBLE_VERSION=${{ matrix.ansible }} && docker build --build-arg RUBY_VERSION=$RUBY_VERSION --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION -t ansible-ruby:$RUBY_VERSION-$ANSIBLE_VERSION .
+      run: RUBY_VERSION=${{ matrix.ruby }} ANSIBLE_VERSION=${{ matrix.ansible }} && docker build --build-arg RUBY_VERSION=$RUBY_VERSION --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION -t pgeraghty/ansible-ruby:$RUBY_VERSION-$ANSIBLE_VERSION .
+    - run: docker login -u pgeraghty -p ${{ secrets.DOCKER_PASSWORD }}
+    - run: RUBY_VERSION=${{ matrix.ruby }} ANSIBLE_VERSION=${{ matrix.ansible }} && docker push pgeraghty/ansible-ruby:$RUBY_VERSION-$ANSIBLE_VERSION
