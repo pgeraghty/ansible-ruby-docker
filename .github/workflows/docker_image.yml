@@ -9,8 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ansible: [2.6.19, 2.8.5]
-        ruby: [2.5.6, 2.6.4]
+        ansible:
+          - 2.0.2
+          - 2.1.6
+          - 2.2.3
+          - 2.3.3
+          - 2.4.6
+          - 2.5.15
+          - 2.6.19
+          - 2.7.12
+          - 2.8.5
+        ruby:
+          - 2.1.10
+          - 2.2.7
+          - 2.3.7
+          - 2.4.7
+          - 2.5.6
+          - 2.6.4
 
     steps:
     - uses: actions/checkout@v1
