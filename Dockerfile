@@ -9,6 +9,7 @@ ENV RUBY_VERSION=$RUBY_VERSION
 ARG ANSIBLE_VERSION
 ENV ANSIBLE_VERSION=$ANSIBLE_VERSION
 
+ENV SODIUM_INSTALL=system
 
 RUN apk add --update python py-pip && \
     apk --update add --virtual build-dependencies \
@@ -16,7 +17,8 @@ RUN apk add --update python py-pip && \
       musl-dev \
       libffi-dev \
       openssl-dev \
-      python-dev && \
+      python-dev \
+      libsodium-dev && \
     apk update && apk upgrade && \   
     pip install --upgrade pip && \
     pip install python-keyczar docker-py && \
