@@ -11,7 +11,9 @@ ENV ANSIBLE_VERSION=$ANSIBLE_VERSION
 
 ENV SODIUM_INSTALL=system
 
-RUN apk add --update python py-pip git && \
+# python & pip for Ansible, git for bundler
+# make/g++ for building native extensions to gems
+RUN apk add --update python py-pip git make g++ && \
     apk --update add --virtual build-dependencies \
       gcc \
       musl-dev \
